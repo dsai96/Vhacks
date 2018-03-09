@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>SocialServe</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script type="text/javascript" src="qr/qrcode.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+		apiKey: "AIzaSyDaj5FRwl_pq4VaeCU7OzSpxDpGwHC7b1M",
+		authDomain: "socialserve-9d2d9.firebaseapp.com",
+		databaseURL: "https://socialserve-9d2d9.firebaseio.com",
+		projectId: "socialserve-9d2d9",
+		storageBucket: "",
+		messagingSenderId: "820071984698"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+</head>
+
+<body class='grey lighten-2'>
+  <nav class="light-green darken-3" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="home.html" class="brand-logo" style="color:#ffb74d;font-family: Avenir">SocialServe</a>
+      <ul class="right hide-on-med-and-down">
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section" id="index-banner">
+    <div class="white z-depth-1 container" style='padding: 1% 1% 1% 1%;'>
+      <div class="row">
+      		<div class="col s4">
+      			<h3>Project Builder</h3>
+      		</div>
+      		<!--eliminate any thing between the comment tags to remove the text fields-->
+      		
+      		<!---->
+      		<div class="input-field col s12">
+			  <input id="qlabel" type="text" class="validate">
+			  <label for="qlabel">Desc</label>
+          	</div>
+        	<!---->
+
+        	<!---->
+          <div class="input-field col s12">
+			  <input id="title" type="text" class="validate">
+			  <label for="title">Title</label>
+          </div>
+          
+          <div class="input-field col s12">
+			  <input id="qr" type="text" class="validate">
+			  <label for="qr">Date</label>
+          </div>
+          
+          <div class="col s4" id="qrcode"></div>
+      		
+          
+		<br>
+		<div class="col s4">
+			<button class="waves-effect waves-light btn yellow darken-2" onclick='save()'>Create</button>
+			<a href='UserSurvey.html' class="waves-effect waves-light btn yellow darken-2">Cancel</a>
+		</div>
+
+    </div>
+      <div class="row center">
+      </div>
+      <br><br>
+    </div>
+  </div>
+
+<style>
+	/* label color */
+   /*.input-field label {
+     color: #FAC832;
+   }*/
+   /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: #FAC832;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid #FAC832;
+     box-shadow: 0 1px 0 0 #FAC832;
+   }
+   /* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid #FAC832;
+     box-shadow: 0 1px 0 0 #FAC832;
+   }
+   /* invalid color */
+   .input-field input[type=text].invalid {
+     border-bottom: 1px solid #FAC832;
+     box-shadow: 0 1px 0 0 #FAC832;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: #FAC832;
+   }
+
+</style>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  
+  <script>
+  $(document).ready(function() {
+    // On doc ready.
+	});
+
+	function save(){
+		var title = $('#title').val();
+		var desc = $('#qlabel').val();
+		var date = $('#qr').val();
+		
+		var project = {
+			'title':title,
+			'desc':desc,
+			'date':date,
+		}
+		
+		var postRef = firebase.database().ref('project').push();
+		postRef.set(project);
+	}
+  </script>
+
+  </body>
+</html>
