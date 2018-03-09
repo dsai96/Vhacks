@@ -1,140 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
   <title>SocialServe</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script type="text/javascript" src="qr/qrcode.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDaj5FRwl_pq4VaeCU7OzSpxDpGwHC7b1M",
-    authDomain: "socialserve-9d2d9.firebaseapp.com",
-    databaseURL: "https://socialserve-9d2d9.firebaseio.com",
-    projectId: "socialserve-9d2d9",
-    storageBucket: "",
-    messagingSenderId: "820071984698"
-  };
-  firebase.initializeApp(config);
-</script>
+  <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDaj5FRwl_pq4VaeCU7OzSpxDpGwHC7b1M",
+      authDomain: "socialserve-9d2d9.firebaseapp.com",
+      databaseURL: "https://socialserve-9d2d9.firebaseio.com",
+      projectId: "socialserve-9d2d9",
+      storageBucket: "socialserve-9d2d9.appspot.com",
+      messagingSenderId: "820071984698"
+    };
+    firebase.initializeApp(config);
+  </script>
 </head>
 
 <body class='grey lighten-2'>
-<div class="navbar-fixed">
-  <nav class="light-green darken-3" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="home.html" class="brand-logo" style="color:#ffb74d;font-family: Avenir">SocialServe</a>
-      <ul class="right hide-on-med-and-down">
-      </ul>
+  <div class="navbar-fixed">
+    <nav class="light-green darken-3" role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" class="brand-logo" style="color:#ffb74d;font-family: Avenir">SocialServe</a>
+        <ul class="right hide-on-med-and-down">
+        </ul>
 
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="#">Navbar Link</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
   </div>
   <div class="section" id="index-banner">
     <div class="white z-depth-1 container" style='padding: 1% 1% 1% 1%;'>
-<!--       <br><br> -->
       <div class="row">
-		  <div class="input-field col s12">
-		  	<h3>Service Projects</h3>
-			  <!--<div class="input-field col s12">
-				  <input placeholder="Scavenge Name" id="name" type="text" class="validate">
-			  </div>-->
-			  
-			  
-			  <table class="highlight">
-        <thead>
-          <tr>
-              <th style='width:65%' data-field="data">Title</th>
-              <th style='width:25%' data-field="pass">Desc</th>
-              <th style='width:25%' data-field="contrib">Date</th>
-          </tr>
-        </thead>
+        <div class="input-field col s12">
+          <h3>Service Projects</h3>
+          <table class="highlight">
+            <thead>
+              <tr>
+                <th style='width:65%' data-field="data">Title</th>
+                <th style='width:25%' data-field="pass">Desc</th>
+                <th style='width:25%' data-field="contrib">Date</th>
+              </tr>
+            </thead>
 
-        <tbody style='padding: 50px 30px 50px 80px;' id='mainTable'>
-        </tbody>
-      </table>
-          </div>
-    </div>
+            <tbody style='padding: 50px 30px 50px 80px;' id='mainTable'>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="row center">
       </div>
       <br><br>
-      
-	<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-	<a href='createStep.html' class="btn-floating btn-large waves-effect waves-light orange accent-4"><i class="material-icons">add</i></a>
-  </div>
+
+      <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a href='createStep.html' class="btn-floating btn-large waves-effect waves-light orange accent-4"><i class="material-icons">add</i></a>
+      </div>
     </div>
   </div>
 
-	<script>
-	
-	// Loading in all values on project section.
-	$(document).ready(function(){
-		var i = 0;
-		firebase.database().ref('project').on('child_added', function(snapshot) {
-		  var x = document.getElementById("mainTable");
-		  var row = x.insertRow(i);
-		  row.innerHTML = '<td><b>'+snapshot.val().title+'</b></td><td><b>'+snapshot.val().desc+'</b></td><td><b>'+snapshot.val().date+'</b></td>';
-		  i++;
-		});
-	});
-	
-	// Extra auth code.
-	var user;
-	var uid;
-	firebase.auth().onAuthStateChanged(function(userN) {
-		if (userN) {
-			uid = userN.uid;
-			alert(uid);
-		} else {
-		}
-	});
-	</script>
+  <script>
+
+    // Extra auth code.
+    var user;
+    firebase.auth().onAuthStateChanged(function(user) {
+      var userN = firebase.auth().currentUser;
+      if (user) {
+        console.log(user);
+        var banner = document.getElementById("logo-container");
+        var btn = document.createElement("BUTTON");
+        var t = document.createTextNode("Logout, " + user.email);
+        btn.appendChild(t);
+        banner.appendChild(btn);
+        btn.onclick = function() {
+          firebase.auth().signOut().then(function() {
+            console.log("Sign-out successful");
+            window.location.href = "login.html";
+          }).catch(function(error) {
+            // An error happened.
+          });
+        };
+      } else {
+
+      }
+
+    });
+  </script>
 
 
-<style>
-	/* label color */
-   /*.input-field label {
+  <style>
+    /* label color */
+
+    /*.input-field label {
      color: #FAC832;
    }*/
-   /* label focus color */
-   .input-field input[type=text]:focus + label {
-     color: #FAC832;
-   }
-   /* label underline focus color */
-   .input-field input[type=text]:focus {
-     border-bottom: 1px solid #FAC832;
-     box-shadow: 0 1px 0 0 #FAC832;
-   }
-   /* valid color */
-   .input-field input[type=text].valid {
-     border-bottom: 1px solid #FAC832;
-     box-shadow: 0 1px 0 0 #FAC832;
-   }
-   /* invalid color */
-   .input-field input[type=text].invalid {
-     border-bottom: 1px solid #FAC832;
-     box-shadow: 0 1px 0 0 #FAC832;
-   }
-   /* icon prefix focus color */
-   .input-field .prefix.active {
-     color: #FAC832;
-   }
 
-</style>
-  </body>
+    /* label focus color */
+
+    .input-field input[type=text]:focus+label {
+      color: #FAC832;
+    }
+
+    /* label underline focus color */
+
+    .input-field input[type=text]:focus {
+      border-bottom: 1px solid #FAC832;
+      box-shadow: 0 1px 0 0 #FAC832;
+    }
+
+    /* valid color */
+
+    .input-field input[type=text].valid {
+      border-bottom: 1px solid #FAC832;
+      box-shadow: 0 1px 0 0 #FAC832;
+    }
+
+    /* invalid color */
+
+    .input-field input[type=text].invalid {
+      border-bottom: 1px solid #FAC832;
+      box-shadow: 0 1px 0 0 #FAC832;
+    }
+
+    /* icon prefix focus color */
+
+    .input-field .prefix.active {
+      color: #FAC832;
+    }
+  </style>
+</body>
+
 </html>

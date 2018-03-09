@@ -83,23 +83,6 @@
     }
   </style>
 </head>
-<!--
-<style>
-
-   /* label focus color */
-   .input-field input[type=text]:focus + label {
-     color: #F0F000;
-   }
-   /* label underline focus color */
-   .input-field input[type=search]:focus {
-     border-bottom: 1px solid #F00FFF;
-   }
-   /* icon prefix focus color */
-   .input-field .prefix.active {
-     color: #00F0F0;
-   }
-	</style>
- -->
 
 <body class='grey lighten-2'>
   <div class="navbar-fixed">
@@ -120,9 +103,30 @@
       <br><br>
       <div class="login form" style='top: 50%; left: 50%'>
         <div class="col s12">
-          <h3>User Login</h3>
+          <h3>User Registration</h3>
         </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="icon_prefix" type="text" class="validate">
+          <label for="firstName">Name</label>
+        </div>
+        <div class="input-field col s12">
 
+          <select>
+            <option value="" disabled selected>Choose your affiliation</option>
+            <option value="j">Judiasm</option>
+            <option value="i">Islam</option>
+            <option value="c">Christian</option>
+            <option value="h">Hindu</option>
+            <option value="a">Atheist</option>
+            <option value="s">Sikhism</option>
+            <option value="o">Other</option>
+          </select>
+        </div>
+        <div class="input-field col s12">
+          <input id="age" type="text" class="validate">
+          <label for="age">Age</label>
+        </div>
         <div class="input-field col s12">
           <input id="email" type="text" class="validate">
           <label for="email">Email</label>
@@ -133,7 +137,6 @@
         </div>
 
         <div class="col s4">
-          <a class="waves-effect waves-light btn yellow darken-2" onclick="submit()">Login</a>
           <a class="waves-effect waves-light btn yellow darken-2" onclick="register()">Register</a>
         </div>
       </div>
@@ -150,7 +153,7 @@
 
 
   <script src="js/init.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
   <script>
     // Initialize Firebase
     var config = {
@@ -164,36 +167,25 @@
     firebase.initializeApp(config);
   </script>
 
-  <!-- <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-auth.js"></script> -->
-
   <script>
     $(document).ready(function() {
       $('select').material_select();
     });
 
 
-    function submit() {
-      firebase.auth().signInWithEmailAndPassword($('#email').val(), $('#password').val()).catch(function(error, user) {
+    function register() {
+      firebase.auth().createUserWithEmailAndPassword($('#email').val(), $('#password').val()).catch(function(error) {
         // Handle Errors here.
-        console.log('jhj');
         var errorCode = error.code;
         var errorMessage = error.message;
-        if (errorMessage == null) {
-          console.log("YAY");
-          alert(user);
+        if (errorMessage != null) {
+          alert(errorMessage);
         } else {
-          console.log('hi');
-          console.log(errorMessage);
-          console.log(errorCode);
+          // window.location.href = "login.html";
         }
       }).then(function() {
-        window.location.href = "UserSurvey.html";
-
+        window.location.href = "login.html";
       });
-    }
-
-    function register() {
-      window.location.href = "register.html";
     }
   </script>
 
