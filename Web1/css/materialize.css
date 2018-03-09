@@ -4669,9 +4669,11 @@ small {
   color: inherit;
 }
 
+
 .card .card-content .card-title {
   line-height: 48px;
 }
+
 
 .card .card-action {
   position: relative;
