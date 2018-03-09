@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+<!-- git test -->
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>ScavengQR</title>
@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  
+
   <style>
 	/* label color */
    /*.input-field label {
@@ -36,7 +36,7 @@
      box-shadow: 0 1px 0 0 #FAC832;
    }
    /*password*/
-   
+
    .input-field input[type=password]:focus + label {
      color: #FAC832;
    }
@@ -55,10 +55,10 @@
      border-bottom: 1px solid #FAC832;
      box-shadow: 0 1px 0 0 #FAC832;
    }
-   
+
    /*password*?
-   
-   
+
+
    /* icon prefix focus color */
    .input-field .prefix.active {
      color: #FAC832;
@@ -66,9 +66,9 @@
 
 </style>
 </head>
-<!-- 
+<!--
 <style>
-	
+
    /* label focus color */
    .input-field input[type=text]:focus + label {
      color: #F0F000;
@@ -89,7 +89,7 @@
   <nav class="grey darken-2" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="home.html" class="brand-logo" style="color:#FAC832;font-family: Avenir">ScavengQR</a>
       <ul class="right hide-on-med-and-down">
-        <!-- 
+        <!--
 <li><a href="#">Git Hub</a></li>
         <li><a href="#">Logout</a></li>
  -->
@@ -134,8 +134,8 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
-  
-  
+
+
 
 <script src="js/init.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
@@ -172,7 +172,7 @@
 		  var errorCode = error.code;
 		  var errorMessage = error.message;
 		  if(errorMessage == null){
-				//will not get called if all is ok		  	
+				//will not get called if all is ok
 		  }
 		  else{
 		  	alert(errorMessage);
@@ -183,7 +183,7 @@
 		});
 		window.location.href = "UserSurvey.html";
 	}
-	
+
 	function register(){
 		firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
 			// Handle Errors here.
@@ -192,7 +192,7 @@
 			// ...
 		});
 	}
-	
+
 </script>
 
   </body>
