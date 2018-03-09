@@ -1,15 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
   <title>SocialServe</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <script type="text/javascript" src="qr/qrcode.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -28,6 +29,7 @@
 	  };
 	  firebase.initializeApp(config);
 	</script>
+
 </head>
 
 
@@ -50,7 +52,7 @@
       			<h3>Project Builder</h3>
       		</div>
       		<!--eliminate any thing between the comment tags to remove the text fields-->
-      		
+
         	<!---->
           <div class="input-field col s12">
 			  <input id="title" type="text" class="validate">
@@ -63,7 +65,7 @@
         <label for="desc">Description</label>
             </div>
           <!---->
-          
+
           <div class="input-field col s12">
 			  <input id="datepicker" type="text" class="validate">
 			  <label for="date">Date</label>
@@ -79,9 +81,9 @@
         <label for="capacity">Capacity</label>
           </div>
 
-		<br>
+        <br>
 
-    </div>
+      </div>
       <div class="row center">
         <div class="pac-card" id="pac-card">
           <div>
@@ -114,7 +116,7 @@
           <span id="place-name"  class="title"></span><br>
           <span id="place-address"></span>
         </div>
-        
+
         <br>
         <div class="col s4">
           <button class="waves-effect waves-light btn yellow darken-2" onclick='save()'>Create</button>
@@ -126,34 +128,12 @@
     </div>
   </div>
 
-<style>
-	/* label color */
-   /*.input-field label {
+  <style>
+    /* label color */
+
+    /*.input-field label {
      color: #FAC832;
    }*/
-   /* label focus color */
-   .input-field input[type=text]:focus + label {
-     color: #FAC832;
-   }
-   /* label underline focus color */
-   .input-field input[type=text]:focus {
-     border-bottom: 1px solid #FAC832;
-     box-shadow: 0 1px 0 0 #FAC832;
-   }
-   /* valid color */
-   .input-field input[type=text].valid {
-     border-bottom: 1px solid #FAC832;
-     box-shadow: 0 1px 0 0 #FAC832;
-   }
-   /* invalid color */
-   .input-field input[type=text].invalid {
-     border-bottom: 1px solid #FAC832;
-     box-shadow: 0 1px 0 0 #FAC832;
-   }
-   /* icon prefix focus color */
-   .input-field .prefix.active {
-     color: #FAC832;
-   }
 
     /* Always set the map height explicitly to define the size of the div
      * element that contains the map. */
@@ -233,9 +213,10 @@
   <script src="./jquery-ui/jquery-ui.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
-  
+
   <script>
   $(document).ready(function() {
+
     $( function() {
         $( "#datepicker" ).datepicker();
       } );
@@ -290,7 +271,7 @@
             map.setCenter(place.geometry.location);
             map.setZoom(17);  // Why 17? Because it looks good.
           }
-          
+
           marker.setPosition(place.geometry.location);
           marker.setVisible(true);
 
@@ -339,7 +320,7 @@
         var date = $('#datepicker').val();
         var capacity = $('#capacity').val();
         var time = $('#time').val();
-        
+
         var project = {
           'title':title,
           'desc':desc,
@@ -348,16 +329,13 @@
           'location': address,
           'time': time
         }
-        
+
         var postRef = firebase.database().ref('project').push();
         postRef.set(project);
 
         window.location.href = 'UserSurvey.html';
 
       }
-
-      
-	
   </script>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDveZT0Eamgm2WQB9PKrg36JcDZh1R3J4Q&libraries=places&callback=initMap" async defer></script>
