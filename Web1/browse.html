@@ -36,10 +36,11 @@
   <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="home.html" class="brand-logo" style="color:#ffe082;font-family: Avenir">SocialServe</a>
       <ul class="right hide-on-med-and-down">
-        <li><a id="userName"></a></li>
-        <li><a id="logout" href="logIn.html">Logout</a></li>
       </ul>
 
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
@@ -53,7 +54,7 @@
           </div>
     </div>
     <!---->
-    <div class="row">
+    <div class="row" id="projectRow">
         <div class="col s12 m4">
           <div class="card medium white">
           <div class="card-image">
@@ -65,7 +66,6 @@
             </div>
             <div class="card-action">
               <a href="#">Join</a>
-<!--               <a href="#">This is a link</a> -->
             </div>
           </div>
         </div>
@@ -129,49 +129,25 @@
 	<script>
 
 	// Loading in all values on project section.
-	/*$(document).ready(function(){
+	$(document).ready(function(){
 		var i = 0;
 		firebase.database().ref('project').on('child_added', function(snapshot) {
-		  var x = document.getElementById("mainTable");
-		  var row = x.insertRow(i);
-		  row.innerHTML = '<td><b>'+snapshot.val().title+'</b></td><td><b>'+snapshot.val().desc+'</b></td><td><b>'+snapshot.val().date+'</b></td>';
+		  var x = document.getElementById("projectRow");
+		  x.innerHTML = x.innerHTML + "<div class='col s12 m4'><div class='card medium white'><div class='card-image'><img src='img/garden.jpg'></div><div class='card-content'><span class='card-title'>"+snapshot.val().name+"</span><p>"+snapshot.val().desc+"</p></div><div class='card-action'><a href='#'>Join</a></div></div></div>";
 		  i++;
 		});
-	});*/
+	});
 
 	// Extra auth code.
-	// var user;
-	// var uid;
-	// firebase.auth().onAuthStateChanged(function(userN) {
-	// 	if (userN) {
-	// 		uid = userN.uid;
-	// 		alert(uid);
-	// 	} else {
-	// 	}
-	// });
-
-  var user;
-  firebase.auth().onAuthStateChanged(function(user) {
-    var userN = firebase.auth().currentUser;
-    if (user) {
-      console.log(user);
-      var banner = document.getElementById("userName");
-      var btn = document.getElementById("logout");
-      var t = document.createTextNode(user.email);
-      banner.appendChild(t);
-      btn.onclick = function() {
-        firebase.auth().signOut().then(function() {
-          console.log("Sign-out successful");
-          window.location.href = "login.html";
-        }).catch(function(error) {
-          // An error happened.
-        });
-      };
-    } else {
-
-    }
-
-  });
+	var user;
+	var uid;
+	firebase.auth().onAuthStateChanged(function(userN) {
+		if (userN) {
+			uid = userN.uid;
+			alert(uid);
+		} else {
+		}
+	});
 	</script>
 
 
