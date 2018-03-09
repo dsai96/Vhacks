@@ -13,29 +13,23 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <script type="text/javascript" src="qr/qrcode.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
-  
-
-	<script>
-	  // Initialize Firebase
-	  var config = {
-		apiKey: "AIzaSyDaj5FRwl_pq4VaeCU7OzSpxDpGwHC7b1M",
-		authDomain: "socialserve-9d2d9.firebaseapp.com",
-		databaseURL: "https://socialserve-9d2d9.firebaseio.com",
-		projectId: "socialserve-9d2d9",
-		storageBucket: "",
-		messagingSenderId: "820071984698"
-	  };
-	  firebase.initializeApp(config);
-	</script>
-
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDaj5FRwl_pq4VaeCU7OzSpxDpGwHC7b1M",
+      authDomain: "socialserve-9d2d9.firebaseapp.com",
+      databaseURL: "https://socialserve-9d2d9.firebaseio.com",
+      projectId: "socialserve-9d2d9",
+      storageBucket: "socialserve-9d2d9.appspot.com",
+      messagingSenderId: "820071984698"
+    };
+    firebase.initializeApp(config);
+  </script>
 </head>
 
-
 <body class='grey lighten-2'>
-  <nav class="light-green darken-3" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="home.html" class="brand-logo" style="color:#ffb74d;font-family: Avenir">SocialServe</a>
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="home.html" class="brand-logo" style="color:#ffe082;font-family: Avenir">SocialServe</a>
       <ul class="right hide-on-med-and-down">
       </ul>
 
@@ -48,7 +42,7 @@
   <div class="section" id="index-banner">
     <div class="white z-depth-1 container" style='padding: 1% 1% 1% 1%;'>
       <div class="row">
-      		<div class="col s4">
+      		<div class="col s5">
       			<h3>Project Builder</h3>
       		</div>
       		<!--eliminate any thing between the comment tags to remove the text fields-->
@@ -62,26 +56,50 @@
           <!---->
           <div class="input-field col s12">
         <input id="desc" type="text" class="validate">
-        <label for="desc">Description</label>
+        <label for="qlabel">Description</label>
             </div>
           <!---->
 
           <div class="input-field col s12">
-			  <input id="datepicker" type="text" class="validate">
-			  <label for="date">Date</label>
+			  <input id="date" type="text" class="validate">
+			  <label for="qr">Date</label>
           </div>
-
-          <div class="input-field col s12">
-        <input id="time" type="text" class="validate">
-        <label for="time">Time</label>
-            </div>
 
           <div class="input-field col s12">
         <input id="capacity" type="text" class="validate">
-        <label for="capacity">Capacity</label>
+        <label for="title">Capacity</label>
           </div>
 
+		<br>
+
+        <!---->
+        <div class="input-field col s12">
+          <input id="qlabel" type="text" class="validate">
+          <label for="qlabel">Desc</label>
+        </div>
+        <!---->
+
+        <!---->
+        <div class="input-field col s12">
+          <input id="title" type="text" class="validate">
+          <label for="title">Title</label>
+        </div>
+
+        <div class="input-field col s12">
+          <input id="qr" type="text" class="validate">
+          <label for="qr">Date</label>
+        </div>
+
+        <div class="col s4" id="qrcode"></div>
+
+
         <br>
+        <!-- 
+<div class="col s4">
+          <button class="waves-effect waves-light btn yellow darken-2" onclick='save()'>Create</button>
+          <a href='UserSurvey.html' class="waves-effect waves-light btn yellow darken-2">Cancel</a>
+        </div>
+ -->
 
       </div>
       <div class="row center">
@@ -119,12 +137,11 @@
 
         <br>
         <div class="col s4">
-          <button class="waves-effect waves-light btn yellow darken-2" onclick='save()'>Create</button>
-          <a href='browse.html' class="waves-effect waves-light btn yellow darken-2">Cancel</a>
+          <button class="waves-effect waves-light btn orange accent-2" onclick='save()'>Create</button>
+          <a href='UserSurvey.html' class="waves-effect waves-light btn orange accent-2">Cancel</a>
         </div>
       </div>
       <br><br>
-
     </div>
   </div>
 
@@ -210,16 +227,11 @@
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="./jquery-ui/jquery-ui.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
 
   <script>
   $(document).ready(function() {
-
-    $( function() {
-        $( "#datepicker" ).datepicker();
-      } );
 
     // On doc ready.
 	});
@@ -228,7 +240,7 @@
 
   function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
+          center: {lat: 41.904755, lng: 12.454628},
           zoom: 13
         });
         var card = document.getElementById('pac-card');
@@ -317,25 +329,26 @@
       function save(){
         var title = $('#title').val();
         var desc = $('#desc').val();
-        var date = $('#datepicker').val();
+        var date = $('#date').val();
         var capacity = $('#capacity').val();
-        var time = $('#time').val();
 
         var project = {
           'title':title,
           'desc':desc,
           'date':date,
           'capacity': capacity,
-          'location': address,
-          'time': time
+          'location': address
         }
 
         var postRef = firebase.database().ref('project').push();
-        postRef.set(project);
+        postRef.set(project).then(function() {
+        	window.location.href = 'browse.html';
+      	});
 
         window.location.href = 'UserSurvey.html';
 
       }
+
   </script>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDveZT0Eamgm2WQB9PKrg36JcDZh1R3J4Q&libraries=places&callback=initMap" async defer></script>
