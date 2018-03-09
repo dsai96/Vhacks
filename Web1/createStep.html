@@ -13,6 +13,8 @@
   <script type="text/javascript" src="qr/qrcode.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
+  
 
 	<script>
 	  // Initialize Firebase
@@ -27,6 +29,7 @@
 	  firebase.initializeApp(config);
 	</script>
 </head>
+
 
 <body class='grey lighten-2'>
   <nav class="light-green darken-3" role="navigation">
@@ -57,20 +60,25 @@
           <!---->
           <div class="input-field col s12">
         <input id="desc" type="text" class="validate">
-        <label for="qlabel">Description</label>
+        <label for="desc">Description</label>
             </div>
           <!---->
           
           <div class="input-field col s12">
-			  <input id="date" type="text" class="validate">
-			  <label for="qr">Date</label>
+			  <input id="datepicker" type="text" class="validate">
+			  <label for="date">Date</label>
           </div>
 
           <div class="input-field col s12">
+        <input id="time" type="text" class="validate">
+        <label for="time">Time</label>
+            </div>
+
+          <div class="input-field col s12">
         <input id="capacity" type="text" class="validate">
-        <label for="title">Capacity</label>
+        <label for="capacity">Capacity</label>
           </div>
-    
+
 		<br>
 
     </div>
@@ -114,6 +122,7 @@
         </div>
       </div>
       <br><br>
+
     </div>
   </div>
 
@@ -221,12 +230,16 @@
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="./jquery-ui/jquery-ui.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   
   <script>
   $(document).ready(function() {
-    
+    $( function() {
+        $( "#datepicker" ).datepicker();
+      } );
+
     // On doc ready.
 	});
 
@@ -323,15 +336,17 @@
       function save(){
         var title = $('#title').val();
         var desc = $('#desc').val();
-        var date = $('#date').val();
+        var date = $('#datepicker').val();
         var capacity = $('#capacity').val();
+        var time = $('#time').val();
         
         var project = {
           'title':title,
           'desc':desc,
           'date':date,
           'capacity': capacity,
-          'location': address
+          'location': address,
+          'time': time
         }
         
         var postRef = firebase.database().ref('project').push();
@@ -340,6 +355,8 @@
         window.location.href = 'UserSurvey.html';
 
       }
+
+      
 	
   </script>
 
