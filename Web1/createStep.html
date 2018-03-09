@@ -13,6 +13,8 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <script type="text/javascript" src="qr/qrcode.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+
+
 	<script>
 	  // Initialize Firebase
 	  var config = {
@@ -47,26 +49,33 @@
       		</div>
       		<!--eliminate any thing between the comment tags to remove the text fields-->
       		
-      		<!---->
-      		<div class="input-field col s12">
-			  <input id="qlabel" type="text" class="validate">
-			  <label for="qlabel">Desc</label>
-          	</div>
-        	<!---->
-
         	<!---->
           <div class="input-field col s12">
 			  <input id="title" type="text" class="validate">
 			  <label for="title">Title</label>
           </div>
+
+          <!---->
+          <div class="input-field col s12">
+        <input id="qlabel" type="text" class="validate">
+        <label for="qlabel">Description</label>
+            </div>
+          <!---->
           
           <div class="input-field col s12">
-			  <input id="qr" type="text" class="validate">
+			  <input id="date" type="text" class="validate">
 			  <label for="qr">Date</label>
           </div>
-          
-          <div class="col s4" id="qrcode"></div>
-      		
+
+          <div class="input-field col s12">
+        <input id="capacity" type="text" class="validate">
+        <label for="title">Capacity</label>
+          </div>
+
+          <div class="input-field col s12">
+        <input id="location" type="text" class="validate">
+        <label for="title">Location</label>
+          </div>
           
 		<br>
 		<div class="col s4">
@@ -125,7 +134,9 @@
 	function save(){
 		var title = $('#title').val();
 		var desc = $('#qlabel').val();
-		var date = $('#qr').val();
+		var date = $('#date').val();
+    var capacity = $('#capacity').val();
+    var capacity = $('#location').val();
 		
 		var project = {
 			'title':title,
@@ -135,8 +146,13 @@
 		
 		var postRef = firebase.database().ref('project').push();
 		postRef.set(project);
-	}
+
+  }
+	
   </script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaj5FRwl_pq4VaeCU7OzSpxDpGwHC7b1M&libraries=places&callback=initMap"
+      async defer></script>
 
   </body>
 </html>
