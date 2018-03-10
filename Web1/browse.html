@@ -36,6 +36,8 @@
   <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="home.html" class="brand-logo"><img src="img/logo.png" style="width:250px;padding-top:15px"></a>
       <ul class="right hide-on-med-and-down">
+        <li><a id="userName"></a></li>
+        <li><a id="logout" href="logIn.html">Logout</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
@@ -142,23 +144,30 @@
 
 	// Extra auth code.
 	var user;
-	var uid;
-	firebase.auth().onAuthStateChanged(function(userN) {
-		if (userN) {
-			uid = userN.uid;
-			//alert(uid);
-		} else {
-		}
-	});
+  firebase.auth().onAuthStateChanged(function(user) {
+    var userN = firebase.auth().currentUser;
+    if (user) {
+      console.log(user);
+      var banner = document.getElementById("userName");
+      var btn = document.getElementById("logout");
+      var t = document.createTextNode(user.email);
+      banner.appendChild(t);
+      btn.onclick = function() {
+        firebase.auth().signOut().then(function() {
+            console.log("Sign-out successful");
+            window.location.href = "login.html";
+        }).catch(function(error) {
+        // An error happened.
+        });
+      };
+    };
+  });
 	
 	function register(num){
 		var postRef = firebase.database().ref('project/'+keys[num]+'/participants').push();
 		postRef.set(firebase.auth().currentUser.uid);
 	}
-	
-	function all(){
-		alert("0");
-	}
+
 	</script>
 
 
