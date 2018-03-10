@@ -321,7 +321,8 @@
           'desc':desc,
           'date':date,
           'partNum': capacity,
-          'location': latLong
+          'location': latLong,
+          'userid':firebase.auth().currentUser.uid
         }
 
         var postRef = firebase.database().ref('project').push();
