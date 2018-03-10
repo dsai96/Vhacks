@@ -65,7 +65,7 @@
               <p>Join the local Islamic center in building a new community garden in the heart of Trastevere, Rome.</p>
             </div>
             <div class="card-action">
-              <a href="#">Join</a>
+              <a onclick="register('4')">Join</a>
             </div>
           </div>
         </div>
@@ -127,13 +127,14 @@
   </div>
 
 	<script>
-
+	var keys = [];
 	// Loading in all values on project section.
 	$(document).ready(function(){
 		var i = 0;
 		firebase.database().ref('project').on('child_added', function(snapshot) {
 		  var x = document.getElementById("projectRow");
-		  x.innerHTML = x.innerHTML + "<div class='col s12 m4'><div class='card medium white'><div class='card-image'><img src='img/garden.jpg'></div><div class='card-content'><span class='card-title'>"+snapshot.val().name+"</span><p>"+snapshot.val().desc+"</p></div><div class='card-action'><a href='#'>Join</a></div></div></div>";
+		  keys.push(snapshot.key);
+		  x.innerHTML = x.innerHTML + "<div class='col s12 m4'><div class='card medium white'><div class='card-image'><img src='img/garden.jpg'></div><div class='card-content'><span class='card-title'>"+snapshot.val().name+"</span><p>"+snapshot.val().desc+"</p></div><div class='card-action'><a onclick='register("+i+")'>Join</a></div></div></div>";
 		  i++;
 		});
 	});
@@ -148,6 +149,15 @@
 		} else {
 		}
 	});
+	
+	function register(num){
+		var postRef = firebase.database().ref('project/'+keys[num]+'/participants').push();
+		postRef.set(firebase.auth().currentUser.uid);
+	}
+	
+	function all(){
+		alert("0");
+	}
 	</script>
 
 
