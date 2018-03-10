@@ -49,49 +49,28 @@
 
         	<!---->
           <div class="input-field col s12">
-			  <input id="title" type="text" class="validate">
+			  <input id="title" type="text">
 			  <label for="title">Title</label>
           </div>
 
           <!---->
           <div class="input-field col s12">
-        <input id="desc" type="text" class="validate">
+        <input id="desc" type="text">
         <label for="qlabel">Description</label>
             </div>
           <!---->
 
           <div class="input-field col s12">
-			  <input id="date" type="text" class="validate">
+			  <input id="date" type="text">
 			  <label for="qr">Date</label>
           </div>
 
           <div class="input-field col s12">
-        <input id="capacity" type="text" class="validate">
+        <input id="capacity" type="text">
         <label for="title">Capacity</label>
           </div>
 
 		<br>
-
-        <!---->
-        <div class="input-field col s12">
-          <input id="qlabel" type="text" class="validate">
-          <label for="qlabel">Desc</label>
-        </div>
-        <!---->
-
-        <!---->
-        <div class="input-field col s12">
-          <input id="title" type="text" class="validate">
-          <label for="title">Title</label>
-        </div>
-
-        <div class="input-field col s12">
-          <input id="qr" type="text" class="validate">
-          <label for="qr">Date</label>
-        </div>
-
-        <div class="col s4" id="qrcode"></div>
-
 
         <br>
         <!-- 
@@ -237,6 +216,7 @@
 	});
 
   var address = null;
+  var latLong = null;
 
   function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -295,6 +275,8 @@
               (place.address_components[2] && place.address_components[2].short_name || '')
             ].join(' ');
           }
+          
+          latLong = {"lat":place.geometry.location.lat(), "lng":place.geometry.location.lng()};
 
           infowindowContent.children['place-icon'].src = place.icon;
           infowindowContent.children['place-name'].textContent = place.name;
@@ -333,11 +315,11 @@
         var capacity = $('#capacity').val();
 
         var project = {
-          'title':title,
+          'name':title,
           'desc':desc,
           'date':date,
-          'capacity': capacity,
-          'location': address
+          'partNum': capacity,
+          'location': latLong
         }
 
         var postRef = firebase.database().ref('project').push();
@@ -345,7 +327,7 @@
         	window.location.href = 'browse.html';
       	});
 
-        window.location.href = 'UserSurvey.html';
+        //window.location.href = 'UserSurvey.html';
 
       }
 
